@@ -48,8 +48,14 @@ const Navbar = () => {
         return (
             <>
                <Nav>
-                <NavLogo to="/">
-                    Logo
+               <NavLogo to="/">
+                <img
+                src="/apex.png"
+                width="80"
+                height="80"
+                className="d-inline-block align-top"
+                alt="React Bootstrap logo"
+                />
                 </NavLogo>
                 <Bars />
     
