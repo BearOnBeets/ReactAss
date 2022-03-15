@@ -26,7 +26,7 @@ function Login(){
             "name":names,
             "password":pass
         }
-        fetch('http://localhost:8000/api/v1/user/login', {
+        fetch('http://localhost:8000/api/v1/user/create', {
             //mode: 'no-cors',
             method: 'POST',
             // credentials: 'same-origin',
@@ -45,11 +45,10 @@ function Login(){
         // navigation("/")
     }) 
 
-    if(accessToken)
 
     return (
     <div>
-    <h1>Please Log In</h1>
+    <h1>Signup</h1>
 
         <div>
             <label>Username:</label>
