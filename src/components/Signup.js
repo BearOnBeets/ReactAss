@@ -2,8 +2,8 @@ import React, { Component,useCallback,useState } from 'react'
 import  { Redirect } from 'react-router-dom'
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
-
-function Login(){
+import Form from 'react-bootstrap/Form';
+function Signup(){
     const navigation = useNavigate();
     const [username,setusername] = useState('');
     const [password,setpassword] = useState('');
@@ -38,33 +38,55 @@ function Login(){
           })
           .then(response => response.json())
           .then(json => {
-              console.log(json)
+              if(typeof json['accessToken']==='undefined'){
+                alert("Invalid Credentials!")
+                navigation("/login")
+              }
+              else
+              {
               localStorage.setItem('username', names)
               localStorage.setItem('token', json['accessToken'])
+              navigation("/")
+              }
             })
-        // navigation("/")
+            .catch((error) => {
+                alert("Invalid Credentials!")
+                navigation("/login")
+        });
+
+
     }) 
 
 
     return (
-    <div>
-    <h1>Signup</h1>
-
-        <div>
-            <label>Username:</label>
-            <input type="text" value={username} onChange={HandleUsernameChange} required></input>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={HandlePasswordChange} required></input>
-        </div>
-        <button onClick={HandleSubmit}>Submit</button>
-
-    </div>
-    )
+            <div className={'login'}>
+              <h1 className={'mb-3'}>Please Signup</h1>
+                <div className={'mb-3'}>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={HandleUsernameChange}
+                    required
+                  />
+                </div>
+                <div className={'mb-5'}>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={HandlePasswordChange}
+                    required
+                  />
+                </div>
+                <button className={'btn btn-primary'} onClick={HandleSubmit}>
+                  Submit
+                </button>
+            </div>
+        );
 }
 
 
 
 
-export default Login
+export default Signup

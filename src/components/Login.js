@@ -2,6 +2,7 @@ import React, { Component,useCallback,useState } from 'react'
 import  { Redirect } from 'react-router-dom'
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
+import Form from 'react-bootstrap/Form';
 
 function Login(){
     const navigation = useNavigate();
@@ -38,31 +39,57 @@ function Login(){
           })
           .then(response => response.json())
           .then(json => {
-              console.log(json)
+              if(typeof json['accessToken']==='undefined'){
+                alert("Invalid Credentials!")
+                navigation("/login")
+              }
+              else{
               localStorage.setItem('username', names)
               localStorage.setItem('token', json['accessToken'])
+              navigation("/")
+              }
             })
-        // navigation("/")
+        .catch((error) => {
+                alert("Invalid Credentials!")
+                navigation("/login")
+        });
+
     }) 
 
-    if(accessToken)
+    if(localStorage.getItem('token'))
+    {
+        return (<h1 className='login'>You are already Logged In!</h1>)
+    }
+    else
+    {
 
-    return (
-    <div>
-    <h1>Please Log In</h1>
-
-        <div>
-            <label>Username:</label>
-            <input type="text" value={username} onChange={HandleUsernameChange} required></input>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={HandlePasswordChange} required></input>
-        </div>
-        <button onClick={HandleSubmit}>Submit</button>
-
-    </div>
-    )
+        return (
+            <div className={'login'}>
+              <h1 className={'mb-3'}>Please Log In</h1>
+                <div className={'mb-3'}>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={HandleUsernameChange}
+                    required
+                  />
+                </div>
+                <div className={'mb-5'}>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={HandlePasswordChange}
+                    required
+                  />
+                </div>
+                <button className={'btn btn-primary'} onClick={HandleSubmit}>
+                  Submit
+                </button>
+            </div>
+        );
+    }
 }
 
 

@@ -10,16 +10,21 @@ import {
 } from "./NavbarElements";
 
 const Navbar = () => {
-
-    if(localStorage.getItem('token')==='true'){
+    if(localStorage.getItem('token')){
         return (
             <>
                <Nav>
                 <NavLogo to="/">
-                    Logo
+                <img
+                src="/apex.png"
+                width="80"
+                height="80"
+                className="d-inline-block align-top"
+                alt="React Bootstrap logo"
+                />
                 </NavLogo>
-                <Bars />
-    
+                <Bars/>
+
                 <NavMenu>
     
                     <NavLink to='/' activeStyle={{ color:'black' }}>
@@ -29,6 +34,10 @@ const Navbar = () => {
     
                     <NavBtn>
                         <NavBtnLink to="/signout">Sign Out</NavBtnLink>                
+                    </NavBtn>
+
+                    <NavBtn>
+                        <NavBtnLink to="/signup">Create an Account</NavBtnLink>                
                     </NavBtn>
                 </NavMenu> 
                </Nav> 
@@ -47,6 +56,9 @@ const Navbar = () => {
                 <NavMenu>
                     <NavBtn>
                         <NavBtnLink to="/login">Log In</NavBtnLink>                
+                    </NavBtn>
+                    <NavBtn>
+                        <NavBtnLink to="/signup">Create an Account</NavBtnLink>                
                     </NavBtn>
                 </NavMenu> 
                </Nav> 

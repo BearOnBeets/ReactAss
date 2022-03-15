@@ -6,6 +6,7 @@ import  { BrowserRouter as Router,Route,Routes } from 'react-router-dom'
 import Navbar from "./components/Navbar";
 import Signout from './components/Signout';
 import Signup from './components/Signup';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Router>
